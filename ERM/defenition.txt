@@ -1,0 +1,56 @@
+//gehe zu https://dbdiagram.io/d und füge den Inhalt dieser Text-Datei ein, um das Diagramm zu sehen.
+
+
+
+Table customer as C {
+  customer_id int [pk, increment]
+  email varchar
+  full_name varchar
+  billing_information varchar
+}
+
+
+Table customer_address {
+  customer_id int [PK, ref: > C.customer_id]
+  address_id int [PK, ref: > A.address_id]
+}
+
+
+Table address as A {
+  address_id int [pk]
+  country varchar
+  state varchar
+  zipcode varchar
+  street_name varchar
+  street_number varchar
+}
+
+
+
+Table order_items {
+  order_items_id int [pk]
+  order_id int [ref: > orders.order_id]
+  product_id int [ref: > product.product_id]
+  quantity int
+  price decimal
+  tax decimal
+}
+
+Table orders {
+  order_id int [pk]
+  customer_id int [ref: > C.customer_id]
+  status varchar
+  total_price decimal
+  tax decimal
+  order_date datetime
+  
+}
+
+Table product {
+  product_id int [pk]
+  name varchar
+  image varchar
+  description varchar
+  price int
+  weight decimal
+}
